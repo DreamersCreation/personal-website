@@ -14,7 +14,8 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Oswald:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Oswald:wght@600&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -29,11 +30,132 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        #comparison {
+            width: 100%;
+            padding-bottom: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        figure {
+            position: absolute;
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/photoshop-face-before.jpg);
+            background-size: cover;
+            font-size: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        #divisor {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/photoshop-face-after.jpg);
+            background-size: cover;
+            position: absolute;
+            width: 50%;
+            box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
+            bottom: 0;
+            height: 100%;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                right: -2px;
+                width: 4px;
+                height: calc(50% - 25px);
+                background: white;
+                z-index: 3;
+            }
+
+            &::before {
+                top: 0;
+                box-shadow: 0 -3px 8px 1px rgba(0, 0, 0, .3);
+            }
+
+            &::after {
+                bottom: 0;
+                box-shadow: 0 3px 8px 1px rgba(0, 0, 0, .3);
+            }
+        }
+
+        #handle {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            z-index: 1;
+
+            &::before,
+            &::after {
+                content: '';
+                width: 0;
+                height: 0;
+                border: 6px inset transparent;
+                position: absolute;
+                top: 50%;
+                margin-top: -6px;
+            }
+
+            &::before {
+                border-right: 6px solid white;
+                left: 50%;
+                margin-left: -17px;
+            }
+
+            &::after {
+                border-left: 6px solid white;
+                right: 50%;
+                margin-right: -17px;
+            }
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            position: absolute;
+            top: 50%;
+            left: -25px;
+            transform: translateY(-50%);
+            background-color: transparent;
+            width: calc(100% + 50px);
+            z-index: 2;
+
+            &:focus,
+            &:active {
+                border: none;
+                outline: none;
+            }
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            border: none;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background: transparent;
+            border: 4px solid white;
+            box-shadow: 0 0 8px 1px rgba(0, 0, 0, .3);
+        }
+
+        input[type=range]::-moz-range-track {
+            -moz-appearance: none;
+            height: 15px;
+            width: 100%;
+            background-color: transparent;
+            position: relative;
+            outline: none;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Spinner Start -->
-    <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner"
+        class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
@@ -41,9 +163,28 @@
     <!-- Spinner End -->
 
 
-<div class="m-auto d-flex justify-content-center align-items-center vh-100">
-    <h1>coming soon</h1>
-</div>
+
+
+
+
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div id="comparison">
+                        <figure>
+                            <div id="handle"></div>
+                            <div id="divisor"></div>
+                        </figure>
+                        <input type="range" min="0" max="100" value="50" id="slider" oninput="moveDivisor()">
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <p>ASSDA</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Back to Top -->
@@ -60,6 +201,9 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+       
+    </script>
 </body>
 
 </html>
