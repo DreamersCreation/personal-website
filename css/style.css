@@ -4,6 +4,7 @@
     --secondary: #191C24;
     --light: #6C7293;
     --dark: #000000;
+    --green: rgb(13, 136, 13);
 }
 
 .back-to-top {
@@ -355,4 +356,13 @@
 
 .footer .copyright a:hover {
     color: var(--primary);
+}
+
+/*** Contact ***/
+
+#Success_Msg{
+    padding-top: 20px;
+    color: var(--green);
+    font-weight: 600;
+    font-size: 20px;
 }
