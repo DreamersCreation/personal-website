@@ -30,10 +30,130 @@
 
   <!-- Template Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
+  <style>
+    #comparison {
+        width: 100%;
+        padding-bottom: 100%;
+        overflow: hidden;
+        position: relative;
+    }
 
+    figure {
+        position: absolute;
+        background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/photoshop-face-before.jpg);
+        background-size: cover;
+        font-size: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    #divisor {
+        background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/photoshop-face-after.jpg);
+        background-size: cover;
+        position: absolute;
+        width: 50%;
+        box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
+        bottom: 0;
+        height: 100%;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            width: 4px;
+            height: calc(50% - 25px);
+            background: white;
+            z-index: 3;
+        }
+
+        &::before {
+            top: 0;
+            box-shadow: 0 -3px 8px 1px rgba(0, 0, 0, .3);
+        }
+
+        &::after {
+            bottom: 0;
+            box-shadow: 0 3px 8px 1px rgba(0, 0, 0, .3);
+        }
+    }
+
+    #handle {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        z-index: 1;
+
+        &::before,
+        &::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border: 6px inset transparent;
+            position: absolute;
+            top: 50%;
+            margin-top: -6px;
+        }
+
+        &::before {
+            border-right: 6px solid white;
+            left: 50%;
+            margin-left: -17px;
+        }
+
+        &::after {
+            border-left: 6px solid white;
+            right: 50%;
+            margin-right: -17px;
+        }
+    }
+
+    input[type=range] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: absolute;
+        top: 50%;
+        left: -25px;
+        transform: translateY(-50%);
+        background-color: transparent;
+        width: calc(100% + 50px);
+        z-index: 2;
+
+        &:focus,
+        &:active {
+            border: none;
+            outline: none;
+        }
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background: transparent;
+        border: 4px solid white;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, .3);
+    }
+
+    input[type=range]::-moz-range-track {
+        -moz-appearance: none;
+        height: 15px;
+        width: 100%;
+        background-color: transparent;
+        position: relative;
+        outline: none;
+    }
+</style>
 </head>
 
 <body>
+
   <!-- Spinner Start -->
   <div id="spinner"
     class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -42,6 +162,7 @@
     </div>
   </div>
   <!-- Spinner End -->
+
   <!-- Navbar Start -->
   <nav class="navbar navbar-expand-lg bg-secondary navbar-dark sticky-top py-lg-0 px-lg-5 wow fadeIn"
     data-wow-delay="0.1s">
@@ -84,11 +205,12 @@
   <!-- Page Header Start -->
   <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container text-center py-5">
-      <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">Contact</h1>
+      <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">Image enhancement</h1>
       <nav aria-label="breadcrumb animated slideInDown">
         <ol class="breadcrumb justify-content-center text-uppercase mb-0">
           <li class="breadcrumb-item"><a class="text-white" href="./index.html">Home</a></li>
-          <li class="breadcrumb-item text-primary active" aria-current="page">Contact</li>
+          <li class="breadcrumb-item"><a class="text-white" href="./index.html">Services</a></li>
+          <li class="breadcrumb-item text-primary active" aria-current="page">Image enhancement</li>
         </ol>
       </nav>
     </div>
@@ -96,71 +218,114 @@
   <!-- Page Header End -->
 
 
-
-
-   <!-- Footer Start -->
-   <div class="container-fluid bg-secondary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.3s">
-                <h4 class="text-uppercase mb-4">Get In Touch</h4>
-                <div class="d-flex align-items-center mb-2">
-                    <div class="btn-square bg-dark flex-shrink-0 me-3">
-                        <span class="fa fa-map-marker-alt text-primary"></span>
-                    </div>
-                    <span class="wrap">60, First Floor, Metha Nagar, Thiruvagoundanoor, Salem, Tamil Nadu 636002</span>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <div class="btn-square bg-dark flex-shrink-0 me-3">
-                        <span class="fa fa-phone-alt text-primary"></span>
-                    </div>
-                    <span class="wrap">+91 96981 09164</span>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="btn-square bg-dark flex-shrink-0 me-3">
-                        <span class="fa fa-envelope-open text-primary"></span>
-                    </div>
-                    <span class="wrap">dreamerscreation84@gmail.com</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.4s">
-                <h4 class="text-uppercase mb-4">Quick Links</h4>
-                <a class="btn btn-link" href="">About Us</a>
-                <a class="btn btn-link" href="">Contact Us</a>
-                <a class="btn btn-link" href="">Our Services</a>
-                <a class="btn btn-link" href="">Terms & Condition</a>
-                <a class="btn btn-link" href="">Support</a>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.5s">
-                <h4 class="text-uppercase mb-4">Services</h4>
-                <a class="btn btn-link" href="./imageenhancement.html">Image Enhancement</a>
-                <a class="btn btn-link" href="./HDRblending.html">HDR Blending</a>
-                <a class="btn btn-link" href="./TwilightImages.html">Twilight Images</a>
-                <a class="btn btn-link" href="./DaytoDusk.html">Day to Dusk</a>
-                <a class="btn btn-link" href="./VirtualDecultter&Staging.html">Virtual Decultter & Staging</a>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.6s">
-                <h4 class="text-uppercase mb-4">Social Media Links</h4>
-                <div class="d-flex pt-1 m-n1">
-                    <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-youtube"></i></a>
-                    <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
+  <!-- Page Start -->
+  <div class="container-xxl py-5 about">
     <div class="container">
-        <div class="copyright">
-            <div class="row justify-content-center">
-                <div class="col-md-12 text-center mb-3 mb-md-0">
-                    &copy; <a class="border-bottom" href="#">Dreamer's Creation</a>, All Right Reserved.
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
+                <!-- <div class="d-flex flex-column">
+                    <img class="img-fluid w-100 align-self-end" src="img/about.png" alt="">
+                    <div class="w-50 bg-secondary p-5" style="margin-top: -35%;">
+                        <h1 class="text-uppercase text-primary mb-3">5 Years</h1>
+                        <h2 class="text-uppercase mb-0">Experience</h2>
+                    </div>
+                </div> -->
+                <div id="comparison">
+                  <figure>
+                      <div id="handle"></div>
+                      <div id="divisor"></div>
+                  </figure>
+                  <input type="range" min="0" max="100" value="50" id="slider" oninput="moveDivisor()">
+              </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <p class="d-inline-block bg-secondary text-primary py-1 px-4">About Us</p>
+                <h1 class="text-uppercase mb-4">A virtual photo editing & design studio for you </h1>
+                <h4 class="mb-3">It's our passion to provide quality, reliability, and accessibility to our customers!</h4>
+                <p>Dreamers Creations provides a wide range of photo editing services, such as image enhancement, HDR blending, color correction, and background removal.  In addition to serving customers around the globe, such as the USA, UK, etc., we are an online photo editing company based in India. Depending on your needs, our photo editing experts will examine and edit your photos thoroughly. Our prices are affordable, and our commitment to creativity is well known</p>
+                <p class="mb-4">The experts at Dremers Creation work hard to provide work of the highest caliber. Our highly skilled team of creative individuals can quickly and efficiently solve even the most challenging problems.</p>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h3 class="text-uppercase mb-3">20+ clients</h3>
+                        <p class="mb-0">Trusted by 20+ clients for delivering exceptional results and exceeding expectations. Join our satisfied clientele and experience top-notch service tailored to your needs.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="text-uppercase mb-3">Since 2019</h3>
+                        <p class="mb-0">
+                            Thriving since 2019, providing consistent excellence and quality service. Trust our experience for your success.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Footer End -->
+<!-- Page End -->
+
+
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-secondary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+      <div class="row g-5">
+        <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.3s">
+          <h4 class="text-uppercase mb-4">Get In Touch</h4>
+          <div class="d-flex align-items-center mb-2">
+            <div class="btn-square bg-dark flex-shrink-0 me-3">
+              <span class="fa fa-map-marker-alt text-primary"></span>
+            </div>
+            <span class="wrap">60, First Floor, Metha Nagar, Thiruvagoundanoor, Salem, Tamil Nadu 636002</span>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <div class="btn-square bg-dark flex-shrink-0 me-3">
+              <span class="fa fa-phone-alt text-primary"></span>
+            </div>
+            <span class="wrap">+91 96981 09164</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="btn-square bg-dark flex-shrink-0 me-3">
+              <span class="fa fa-envelope-open text-primary"></span>
+            </div>
+            <span class="wrap">dreamerscreation84@gmail.com</span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.4s">
+          <h4 class="text-uppercase mb-4">Quick Links</h4>
+          <a class="btn btn-link" href="">About Us</a>
+          <a class="btn btn-link" href="">Contact Us</a>
+          <a class="btn btn-link" href="">Our Services</a>
+          <a class="btn btn-link" href="">Terms & Condition</a>
+          <a class="btn btn-link" href="">Support</a>
+        </div>
+        <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.5s">
+          <h4 class="text-uppercase mb-4">Services</h4>
+          <a class="btn btn-link" href="./imageenhancement.html">Image Enhancement</a>
+          <a class="btn btn-link" href="./HDRblending.html">HDR Blending</a>
+          <a class="btn btn-link" href="./TwilightImages.html">Twilight Images</a>
+          <a class="btn btn-link" href="./DaytoDusk.html">Day to Dusk</a>
+          <a class="btn btn-link" href="./VirtualDecultter&Staging.html">Virtual Decultter & Staging</a>
+        </div>
+        <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.6s">
+          <h4 class="text-uppercase mb-4">Social Media Links</h4>
+          <div class="d-flex pt-1 m-n1">
+            <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-youtube"></i></a>
+            <a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="copyright">
+        <div class="row justify-content-center">
+          <div class="col-md-12 text-center mb-3 mb-md-0">
+            &copy; <a class="border-bottom" href="#">Dreamer's Creation</a>, All Right Reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
 
 
   <!-- Back to Top -->
