@@ -410,4 +410,13 @@
     color: var(--green);
     font-weight: 600;
     font-size: 20px;
+    transition: all 2s;
+}
+
+#UnsentSuccess_Msg{
+    padding-top: 20px;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 20px;
+    transition: all 2s;
 }
