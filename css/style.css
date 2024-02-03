@@ -226,6 +226,18 @@
 }
 
 
+/*** About ***/
+
+.about .bg_class{
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/about_bg.png");
+ 
+}
+
+
+
 /*** Service ***/
 .service-item .btn {
     position: absolute;
