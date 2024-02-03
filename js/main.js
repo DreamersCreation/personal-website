@@ -1,3 +1,4 @@
+// Silder Before and After 
 var divisor = document.getElementById("divisor"),
 handle = document.getElementById("handle"),
 slider = document.getElementById("slider");
@@ -71,7 +72,6 @@ moveDivisor();
 
 
  // Form script
-
  const scriptURL = 'https://script.google.com/macros/s/AKfycbxze_pEYSfn90dHIFkCzU0l07IJ_rrtw8BjvUravJ_oZJejbM89iFHY5CjC8UdM66MU8g/exec'
  const form = document.forms['submit-to-google-sheet'];
  const sentmsg = document.getElementById("Success_Msg");

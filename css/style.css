@@ -1,4 +1,7 @@
+
 /********** Template CSS **********/
+
+
 :root {
     --primary: #EB1616;
     --secondary: #191C24;
@@ -13,6 +16,24 @@
     right: 45px;
     bottom: 45px;
     z-index: 99;
+}
+
+
+/* custom scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #EB1616;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #EB1616;
 }
 
 
@@ -318,6 +339,18 @@
 
 
 /*** Footer ***/
+.footer{
+    font-size: 15px !important;
+}
+
+.footer .wrap {
+    overflow-wrap: anywhere;
+    transition: .3s;
+}
+.footer .wrap:hover{
+    color: var(--primary);
+}
+
 .footer .btn.btn-link {
     display: block;
     margin-bottom: 5px;
