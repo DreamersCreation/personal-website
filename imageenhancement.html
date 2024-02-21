@@ -32,124 +32,244 @@
   <link href="css/style.css" rel="stylesheet">
   <style>
     #comparison {
-        width: 100%;
-        padding-bottom: 100%;
-        overflow: hidden;
-        position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      overflow: hidden;
+      position: relative;
     }
 
     figure {
-        position: absolute;
-        background-image: url('img/DSC03103.jpg');
-        background-size: cover;
-        font-size: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
+      position: absolute;
+      background-image: url('img/DSC03103.jpg');
+      background-size: cover;
+      font-size: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
     }
 
     #divisor {
-        background-image: url('img/DSC03104.jpg');
-        background-size: cover;
+      background-image: url('img/DSC03104.jpg');
+      background-size: cover;
+      position: absolute;
+      width: 50%;
+      box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
+      bottom: 0;
+      height: 100%;
+
+      &::before,
+      &::after {
+        content: '';
         position: absolute;
-        width: 50%;
-        box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
+        right: -2px;
+        width: 4px;
+        height: calc(50% - 25px);
+        background: white;
+        z-index: 3;
+      }
+
+      &::before {
+        top: 0;
+        box-shadow: 0 -3px 8px 1px rgba(0, 0, 0, .3);
+      }
+
+      &::after {
         bottom: 0;
-        height: 100%;
-
-        &::before,
-        &::after {
-            content: '';
-            position: absolute;
-            right: -2px;
-            width: 4px;
-            height: calc(50% - 25px);
-            background: white;
-            z-index: 3;
-        }
-
-        &::before {
-            top: 0;
-            box-shadow: 0 -3px 8px 1px rgba(0, 0, 0, .3);
-        }
-
-        &::after {
-            bottom: 0;
-            box-shadow: 0 3px 8px 1px rgba(0, 0, 0, .3);
-        }
+        box-shadow: 0 3px 8px 1px rgba(0, 0, 0, .3);
+      }
     }
 
     #handle {
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      z-index: 1;
+
+      &::before,
+      &::after {
+        content: '';
+        width: 0;
+        height: 0;
+        border: 6px inset transparent;
         position: absolute;
-        height: 50px;
-        width: 50px;
         top: 50%;
+        margin-top: -6px;
+      }
+
+      &::before {
+        border-right: 6px solid white;
         left: 50%;
-        transform: translateY(-50%) translateX(-50%);
-        z-index: 1;
+        margin-left: -17px;
+      }
 
-        &::before,
-        &::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border: 6px inset transparent;
-            position: absolute;
-            top: 50%;
-            margin-top: -6px;
-        }
-
-        &::before {
-            border-right: 6px solid white;
-            left: 50%;
-            margin-left: -17px;
-        }
-
-        &::after {
-            border-left: 6px solid white;
-            right: 50%;
-            margin-right: -17px;
-        }
+      &::after {
+        border-left: 6px solid white;
+        right: 50%;
+        margin-right: -17px;
+      }
     }
 
     input[type=range] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        position: absolute;
-        top: 50%;
-        left: -25px;
-        transform: translateY(-50%);
-        background-color: transparent;
-        width: calc(100% + 50px);
-        z-index: 2;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      position: absolute;
+      top: 50%;
+      left: -25px;
+      transform: translateY(-50%);
+      background-color: transparent;
+      width: calc(100% + 50px);
+      z-index: 2;
 
-        &:focus,
-        &:active {
-            border: none;
-            outline: none;
-        }
+      &:focus,
+      &:active {
+        border: none;
+        outline: none;
+      }
     }
 
     input[type=range]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        border: none;
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        background: transparent;
-        border: 4px solid white;
-        box-shadow: 0 0 8px 1px rgba(0, 0, 0, .3);
+      -webkit-appearance: none;
+      border: none;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      background: transparent;
+      border: 4px solid white;
+      box-shadow: 0 0 8px 1px rgba(0, 0, 0, .3);
     }
 
     input[type=range]::-moz-range-track {
-        -moz-appearance: none;
-        height: 15px;
-        width: 100%;
-        background-color: transparent;
-        position: relative;
-        outline: none;
+      -moz-appearance: none;
+      height: 15px;
+      width: 100%;
+      background-color: transparent;
+      position: relative;
+      outline: none;
     }
-</style>
+
+
+    @keyframes zoomin {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .gallery-item {
+      display: block;
+    }
+
+    .gallery-item img {
+      box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.15);
+      transition: box-shadow 0.2s;
+    }
+
+    .gallery-item:hover img {
+      box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.35);
+    }
+
+    .lightbox-modal .modal-content {
+      background-color: rgb(0 0 0 / 0.75);
+    }
+
+    .lightbox-modal .btn-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-size: 1.25rem;
+      z-index: 10;
+      filter: invert(1) grayscale(100);
+    }
+
+    .lightbox-modal .modal-body {
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+
+    .lightbox-modal .lightbox-content {
+      width: 100%;
+    }
+
+    .lightbox-modal .carousel-indicators {
+      margin-bottom: 0;
+    }
+
+    .lightbox-modal .carousel-indicators [data-bs-target] {
+      background-color: #fff !important;
+    }
+
+    .lightbox-modal .carousel-inner {
+      width: 75%;
+    }
+
+    .lightbox-modal .carousel-inner img {
+      animation: zoomin 10s linear infinite;
+    }
+
+    .lightbox-modal .carousel-item .carousel-caption {
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding-bottom: 2rem;
+      background-color: rgb(0 0 0 / 0.75);
+      color: #fff !important;
+    }
+
+    .lightbox-modal .carousel-control-prev,
+    .lightbox-modal .carousel-control-next {
+      width: auto;
+    }
+
+    .lightbox-modal .carousel-control-prev {
+      left: 1.25rem;
+    }
+
+    .lightbox-modal .carousel-control-next {
+      right: 1.25rem;
+    }
+
+    @media (min-width: 1400px) {
+      .lightbox-modal .carousel-inner {
+        max-width: 60%;
+      }
+    }
+
+    [data-bs-theme="dark"] .lightbox-modal .carousel-control-next-icon,
+    [data-bs-theme="dark"] .lightbox-modal .carousel-control-prev-icon {
+      filter: none;
+    }
+
+    .btn-fullscreen-enlarge,
+    .btn-fullscreen-exit {
+      position: absolute;
+      top: 1.25rem;
+      right: 3.5rem;
+      z-index: 10;
+      border: 0;
+      background: transparent;
+      opacity: .6;
+      font-size: 1.25rem;
+    }
+
+    .bi {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.035em;
+      fill: #fff;
+    }
+  </style>
 </head>
 
 <body>
@@ -220,46 +340,154 @@
   <!-- Page Start -->
   <div class="container-xxl py-5 about">
     <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
-                <!-- <div class="d-flex flex-column">
-                    <img class="img-fluid w-100 align-self-end" src="img/about.png" alt="">
-                    <div class="w-50 bg-secondary p-5" style="margin-top: -35%;">
-                        <h1 class="text-uppercase text-primary mb-3">5 Years</h1>
-                        <h2 class="text-uppercase mb-0">Experience</h2>
-                    </div>
-                </div> -->
-                <div id="comparison">
-                  <figure>
-                      <div id="handle"></div>
-                      <div id="divisor"></div>
-                  </figure>
-                  <input type="range" min="0" max="100" value="50" id="slider" oninput="moveDivisor()">
-              </div>
-            </div>
-            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                <p class="d-inline-block bg-secondary text-primary py-1 px-4">About Us</p>
-                <h1 class="text-uppercase mb-4">A virtual photo editing & design studio for you </h1>
-                <h4 class="mb-3">It's our passion to provide quality, reliability, and accessibility to our customers!</h4>
-                <p>Dreamers Creations provides a wide range of photo editing services, such as image enhancement, HDR blending, color correction, and background removal.  In addition to serving customers around the globe, such as the USA, UK, etc., we are an online photo editing company based in India. Depending on your needs, our photo editing experts will examine and edit your photos thoroughly. Our prices are affordable, and our commitment to creativity is well known</p>
-                <p class="mb-4">The experts at Dremers Creation work hard to provide work of the highest caliber. Our highly skilled team of creative individuals can quickly and efficiently solve even the most challenging problems.</p>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <h3 class="text-uppercase mb-3">20+ clients</h3>
-                        <p class="mb-0">Trusted by 20+ clients for delivering exceptional results and exceeding expectations. Join our satisfied clientele and experience top-notch service tailored to your needs.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <h3 class="text-uppercase mb-3">Since 2019</h3>
-                        <p class="mb-0">
-                            Thriving since 2019, providing consistent excellence and quality service. Trust our experience for your success.</p>
-                    </div>
-                </div>
-            </div>
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
+          <div id="comparison">
+            <figure>
+              <div id="handle"></div>
+              <div id="divisor"></div>
+            </figure>
+            <input type="range" min="0" max="100" value="50" id="slider" oninput="moveDivisor()">
+          </div>
         </div>
+        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+          <p class="d-inline-block bg-secondary text-primary py-1 px-4">Image enhancement</p>
+          <h1 class="text-uppercase mb-4">Expert Image Improvement Services</h1>
+          <p>With the help of professional image enhancement services, you may greatly improve the quality of your
+            digital photos. We provide expert services with rapid turnaround times and affordable prices, covering
+            everything from cropping and eliminating noise, grains, and blemishes in photographs to applying filters,
+            removing or adding backdrops, and modifying saturation, color balance, contrast, brightness, and density of
+            images.</p>
+          <h4 class="mb-3">ULTRA VIDEO REPAIR!</h4>
+          <p class="mb-4">The experts at Dremers Creation work hard to provide work of the highest caliber. Our highly
+            skilled team of creative individuals can quickly and efficiently solve even the most challenging problems.
+          </p>
+          <div class="row g-4">
+            <div class="col-md-6">
+              <ul>
+                <li>Window details</li>
+                <li>White Balancing</li>
+                <li>Vertical & Horizontal Straightening </li>
+                <li>Image Sharpening</li>
+                <li>Lens correction</li>
+                <li>Brightness & Contrast Adjustment</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul>
+                <li>Colour balance
+                </li>
+                <li>Tv screen& fireplace replacement</li>
+                <li>Pool Dust & wire removal</li>
+                <li>Sky replacement</li>
+                <li>Flash Reflection Removal</li>
+                <li>Camera &photographer removal</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-<!-- Page End -->
+  </div>
+  <!-- Page End -->
 
+
+
+  <div class="container-xxl pb-5" data-wow-delay="0.1s">
+    <svg class="d-none" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="enlarge" viewBox="0 0 16 16">
+        <path
+          d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
+      </symbol>
+      <symbol id="exit" viewBox="0 0 16 16">
+        <path
+          d="M5.5 0a.5.5 0 0 1 .5.5v4A1.5 1.5 0 0 1 4.5 6h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 10 4.5v-4a.5.5 0 0 1 .5-.5zM0 10.5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 6 11.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zm10 1a1.5 1.5 0 0 1 1.5-1.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4z" />
+      </symbol>
+    </svg>
+    <h1 class="text-center mb-3">View Our Image Enhancement Projects</h1>
+    <p class="text-center mb-4">Click an image to reveal the images </p>
+
+    <section class="photo-gallery" data-wow-delay="0.1s">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 gallery-grid">
+          <div class="col" data-wow-delay="0.1s">
+            <a class="gallery-item" href="https://picsum.photos/id/251/1200/800.webp">
+              <img src="https://picsum.photos/id/251/480/320.webp" class="img-fluid" alt="Lorem ipsum dolor sit amet">
+            </a>
+          </div>
+          <div class="col">
+            <a class="gallery-item" href="https://picsum.photos/id/678/1200/800.webp" data-wow-delay="0.2s">
+              <img src="https://picsum.photos/id/678/480/320.webp" class="img-fluid" alt="Ipsum lorem dolor sit amet">
+            </a>
+          </div>
+          <div class="col">
+            <a class="gallery-item" href="https://picsum.photos/id/74/1200/800.webp" data-wow-delay="0.3s">
+              <img src="https://picsum.photos/id/74/480/320.webp" class="img-fluid" alt="Dolor lorem ipsum sit amet">
+            </a>
+          </div>
+          <div class="col">
+            <a class="gallery-item" href="https://picsum.photos/id/92/1200/800.webp" data-wow-delay="0.4s">
+              <img src="https://picsum.photos/id/92/480/320.webp" class="img-fluid" alt="Sit amet lorem ipsum dolor">
+            </a>
+          </div>
+          <div class="col">
+            <a class="gallery-item" href="https://picsum.photos/id/62/1200/800.webp" data-wow-delay="0.5s">
+              <img src="https://picsum.photos/id/62/480/320.webp" class="img-fluid"
+                alt="Aut ipsam deserunt nostrum quo">
+            </a>
+          </div>
+          <div class="col">
+            <a class="gallery-item" href="https://picsum.photos/id/575/1200/800.webp" data-wow-delay="0.6s">
+              <img src="https://picsum.photos/id/575/480/320.webp" class="img-fluid"
+                alt="Nulla ex nihil eligendi tempora">
+            </a>
+          </div>
+          <div class="col">
+            <a class="gallery-item" href="https://picsum.photos/id/110/1200/800.webp" data-wow-delay="0.7s">
+              <img src="https://picsum.photos/id/110/480/320.webp" class="img-fluid" alt="Nemo perspiciatis voluptatum">
+            </a>
+          </div>
+          <div class="col">
+            <a class="gallery-item" href="https://picsum.photos/id/177/1200/800.webp" data-wow-delay="0.8s">
+              <img src="https://picsum.photos/id/177/480/320.webp" class="img-fluid"
+                alt="Accusantium consequuntur modi">
+            </a>
+          </div>
+          <div class="col">
+            <a class="gallery-item" href="https://picsum.photos/id/197/1200/800.webp" data-wow-delay="0.9s">
+              <img src="https://picsum.photos/id/197/480/320.webp" class="img-fluid"
+                alt="Dolore asperiores reprehenderit">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="modal fade lightbox-modal" id="lightbox-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+        <div class="modal-content">
+          <button type="button" class="btn-fullscreen-enlarge" aria-label="Enlarge fullscreen">
+            <svg class="bi">
+              <use href="#enlarge"></use>
+            </svg>
+          </button>
+          <button type="button" class="btn-fullscreen-exit d-none" aria-label="Exit fullscreen">
+            <svg class="bi">
+              <use href="#exit"></use>
+            </svg>
+          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-body">
+            <div class="lightbox-content">
+              <!-- JS content here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 
   <!-- Footer Start -->
@@ -340,6 +568,7 @@
 
   <!-- Template Javascript -->
   <script src="js/main.js"></script>
+
 </body>
 
 </html>
